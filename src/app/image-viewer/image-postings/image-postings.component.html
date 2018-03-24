@@ -1,0 +1,38 @@
+<main class="container">
+  <div class="row">
+
+    <div class="col-lg-9">
+      <h2>Welcome!</h2>
+      <p>Here you can manage all your images, view and delete them, <br>
+        It's secure since nothing is uploading from your PC to anywhere <br>
+        Please click on Upload New Image button to upload images. </p>
+    </div>
+    <div class="col-lg-2">
+      <div class="fileUpload btn btn-primary">
+        <span>Upload New Image</span>
+        <input type="file" class="upload" accept="image/*" (change)="uploadFile($event)"/>
+      </div>
+    </div>
+
+    <div class="col-lg-12" *ngIf="imageArr.length > 0">
+      <div class="col-lg-10 images-continer mx-auto">
+        <div class="image-container" (click)="openZoom(i)" *ngFor="let item of imageArr; let i = index" [attr.data-index]="i">
+          <img src="{{item.base64}}" width="150" height="150" alt="newImage"><br>
+          <label>Created Date: {{item.createdDate}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-container" *ngIf="zoomClicked" (click)="close()">
+    <div class="zoom-continer">
+      <img src="{{zoomedImage}}" alt="" />
+      <div class="delete-image">
+        <img src="assets/img/close.png" alt="delete" (click)="delete()"/>
+      </div>
+      <div class="close-image" (click)="close()">
+        <img src="assets/img/delete.png" alt="close"/>
+      </div>
+    </div>
+  </div>
+</main>
